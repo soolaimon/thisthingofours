@@ -22,12 +22,9 @@ module.exports = function(grunt) {
       }
     },
     uglify: {
-      options: {
-        banner: '<%= banner %>'
-      },
       dist: {
-        src: '<%= concat.dist.dest %>',
-        dest: 'dist/<%= pkg.name %>.min.js'
+        src: 'scripts/**/*.js',
+        dest: 'scripts/application.min.js'
       }
     },
     jshint: {
@@ -77,16 +74,24 @@ module.exports = function(grunt) {
       }
     },
     sass: {
-    dist: {
-      files: [{
+      dist: {
+        files: [{
+          expand: true,
+          extDot: 'last',
+          src: ['styles/styles.scss'],
+          ext: '.css'
+        }],
+        verbose: true,
+      }
+    },
+    react: {
+      files: {
         expand: true,
-        extDot: 'last',
-        src: ['styles/styles.scss'],
-        ext: '.css'
-      }],
-      verbose: true,
+        src: ['**/*.jsx'],
+        dest: 'scripts/',
+        ext: '.js'
+      }
     }
-  }
   });
 
   // These plugins provide necessary tasks.
@@ -97,9 +102,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-react');
 
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify']);
+  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'sass', 'react']);
 
 };

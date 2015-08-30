@@ -11,19 +11,23 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    react: {
+      files: {
+        expand: true,
+        src: ['scripts/*.jsx'],
+        dest: './',
+        ext: '.js'
+      }
+    },
     concat: {
-      options: {
-        banner: '<%= banner %>',
-        stripBanners: true
-      },
       dist: {
-        src: ['lib/<%= pkg.name %>.js'],
-        dest: 'dist/<%= pkg.name %>.js'
+        src: ['scripts/*.js'],
+        dest: 'scripts/application.js'
       }
     },
     uglify: {
       dist: {
-        src: 'scripts/**/*.js',
+        src: 'scripts/application.js',
         dest: 'scripts/application.min.js'
       }
     },
@@ -51,9 +55,6 @@ module.exports = function(grunt) {
       lib_test: {
         src: ['script/**/*.js', 'test/**/*.js']
       }
-    },
-    qunit: {
-      files: ['test/**/*.html']
     },
     watch: {
       gruntfile: {
@@ -83,21 +84,12 @@ module.exports = function(grunt) {
         }],
         verbose: true,
       }
-    },
-    react: {
-      files: {
-        expand: true,
-        src: ['**/*.jsx'],
-        dest: 'scripts/',
-        ext: '.js'
-      }
     }
   });
 
   // These plugins provide necessary tasks.
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-qunit');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-wiredep');
@@ -106,6 +98,6 @@ module.exports = function(grunt) {
 
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'qunit', 'concat', 'uglify', 'sass', 'react']);
+  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'sass']);
 
 };

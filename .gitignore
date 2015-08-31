@@ -1,3 +1,4 @@
 node_modules
 thingofours.db
 npm-debug.log
+.env

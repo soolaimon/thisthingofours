@@ -10,5 +10,5 @@ get '/' do
 end
 
 get '/movies/' do
-  json  movies: Movie.all 
+  json Movie.all 
 end

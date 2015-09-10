@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150830171756) do
+ActiveRecord::Schema.define(version: 20150831032131) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20150830171756) do
     t.integer  "rt_id"
     t.string   "rt_poster_profile", default: "http://d3biamo577v4eu.cloudfront.net/static/images/redesign/poster_default.gif"
     t.string   "rt_poster_thumb",   default: "http://d3biamo577v4eu.cloudfront.net/static/images/redesign/poster_default.gif"
+    t.datetime "watched_in"
   end
 
 end

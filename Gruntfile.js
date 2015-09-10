@@ -11,6 +11,21 @@ module.exports = function(grunt) {
       '* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
       ' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
     // Task configuration.
+    watch: {
+      react: {
+        files: 'scripts/*.jsx',
+        tasks: ['clean','react','uglify']
+      },
+      sass: {
+        files: 'styles/*.scss',
+        tasks: ['sass']
+      },
+      lib_test: {
+        files: '<%= jshint.lib_test.src %>',
+        tasks: ['jshint:lib_test', 'qunit']
+      }
+    },
+    clean: ['scripts/application.min.js'],
     react: {
       files: {
         expand: true,
@@ -19,15 +34,15 @@ module.exports = function(grunt) {
         ext: '.js'
       }
     },
-    concat: {
-      dist: {
-        src: ['scripts/*.js'],
-        dest: 'scripts/application.js'
-      }
-    },
+    // concat: {
+    //   dist: {
+    //     src: ['scripts/*.js'],
+    //     dest: 'scripts/application.js'
+    //   }
+    // },
     uglify: {
       dist: {
-        src: 'scripts/application.js',
+        src: 'scripts/*.js',
         dest: 'scripts/application.min.js'
       }
     },
@@ -54,16 +69,6 @@ module.exports = function(grunt) {
       },
       lib_test: {
         src: ['script/**/*.js', 'test/**/*.js']
-      }
-    },
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      lib_test: {
-        files: '<%= jshint.lib_test.src %>',
-        tasks: ['jshint:lib_test', 'qunit']
       }
     },
     wiredep: {
@@ -95,9 +100,10 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-wiredep');
   grunt.loadNpmTasks('grunt-contrib-sass');
   grunt.loadNpmTasks('grunt-react');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
 
   // Default task.
-  grunt.registerTask('default', ['jshint', 'concat', 'uglify', 'sass']);
+  grunt.registerTask('default', ['watch']);
 
 };

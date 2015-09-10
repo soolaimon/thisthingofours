@@ -1,4 +1,4 @@
-var MovieList = React.createClass({
+var MovieList = React.createClass({displayName: "MovieList",
   getMoviesFromServer: function () {
     $.ajax({
       url: this.props.url,
@@ -19,13 +19,13 @@ var MovieList = React.createClass({
   },
   render: function () {
     return (
-      <div className="container">
-        <h1>Some Movies</h1>
-      </div>
+      React.createElement("div", {className: "container"}, 
+        React.createElement("h1", null, "Some Movies")
+      )
     );
   }
 });
 React.render(
-  <MovieList url="/movies/"/>,
+  React.createElement(MovieList, {url: "/movies/"}),
   document.getElementById('movie-list')
 );

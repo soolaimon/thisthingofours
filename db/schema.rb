@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150831032131) do
+ActiveRecord::Schema.define(version: 20150911160046) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.datetime "watched_at"
-    t.date     "scheduled_for"
+    t.integer  "scheduled_for"
     t.integer  "thing_id"
     t.integer  "rt_id"
     t.string   "rt_poster_profile", default: "http://d3biamo577v4eu.cloudfront.net/static/images/redesign/poster_default.gif"

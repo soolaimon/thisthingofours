@@ -40,7 +40,7 @@ var MovieList = React.createClass({displayName: "MovieList",
 var MovieTile = React.createClass({displayName: "MovieTile",
   render: function () {
     return (
-      React.createElement("div", {className: "movietile col-md-3"}, 
+      React.createElement("div", {className: "movie-tile col-md-3"}, 
       React.createElement("img", {src:  this.props.movie.rt_poster_thumb}), 
         React.createElement("h4", null,  this.props.movie.title), 
         React.createElement("p", null,  this.props.movie.description)

@@ -2,3 +2,5 @@ node_modules
 thingofours.db
 npm-debug.log
 .env
+*.css.map
+*.scssc

@@ -5795,5 +5795,7 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
+.movie-tile {
+  min-height: 400px; }
 
 /*# sourceMappingURL=styles.css.map */

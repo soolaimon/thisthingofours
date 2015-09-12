@@ -3,7 +3,7 @@ var TimelineThing = React.createClass({
   handleClick: function () {
     React.unmountComponentAtNode(document.getElementById('movie-list'));
     React.render(
-      <MovieList url={'/things/' + this.props.thing + '/movies.json'}/>,
+      <MovieList thing={this.props.thing} url={'/things/' + this.props.thing.id + '/movies.json'}/>,
       document.getElementById('movie-list')
     );
 
@@ -11,7 +11,7 @@ var TimelineThing = React.createClass({
 
   render: function () {
     return(
-      <div clasName="timeline-year" onClick={this.handleClick}>{ this.props.thing }</div>
+      <div className="timeline-year" onClick={this.handleClick}>{ this.props.thing.id }</div>
     )
   }
 
@@ -23,16 +23,15 @@ var Timeline = React.createClass({
   },
   componentDidMount: function () {
     $.ajax({
-      url: '/thing_ids.json',
+      url: '/things.json',
       dataType: 'json',
       cache: false,
       type: 'GET',
       success: function (data){
-        console.log(data)
         this.setState({data: data});
       }.bind(this),
       error: function (xhr, status, err) {
-        console.error('/thing_ids.json', status, err.toString());
+        console.error('/things.json', status, err.toString());
       }.bind(this)
     }); 
 

@@ -14,10 +14,6 @@ get '/things' do
   erb :things
 end
 
-get '/thing_ids.json' do
-  json Thing.all.pluck(:id)
-end
-
 get '/things.json' do
   json Thing.all
 end

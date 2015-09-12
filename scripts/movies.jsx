@@ -46,8 +46,3 @@ var MovieTile = React.createClass({
     );
   }
 });
-
-React.render(
-  <MovieList url="/movies/"/>,
-  document.getElementById('movie-list')
-);

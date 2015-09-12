@@ -5795,7 +5795,10 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-.movie-tile {
+#movie-list .movie-tile {
   min-height: 400px; }
+
+#thing-sidebar .timeline-year {
+  cursor: pointer; }
 
 /*# sourceMappingURL=styles.css.map */

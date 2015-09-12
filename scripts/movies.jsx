@@ -20,7 +20,6 @@ var MovieList = React.createClass({
     this.getMoviesFromServer();
   },
   render: function () {
-    console.log(this.state.data);
     var movieNodes = this.state.data.map(function(movie) {
       return(
         <MovieTile movie={movie}>
@@ -30,7 +29,6 @@ var MovieList = React.createClass({
 
     return (
       <div className="container">
-        <h1>Some Movies</h1>
         { movieNodes }
       </div>
     );

@@ -20,7 +20,6 @@ var MovieList = React.createClass({displayName: "MovieList",
     this.getMoviesFromServer();
   },
   render: function () {
-    console.log(this.state.data);
     var movieNodes = this.state.data.map(function(movie) {
       return(
         React.createElement(MovieTile, {movie: movie}
@@ -30,7 +29,6 @@ var MovieList = React.createClass({displayName: "MovieList",
 
     return (
       React.createElement("div", {className: "container"}, 
-        React.createElement("h1", null, "Some Movies"), 
          movieNodes 
       )
     );

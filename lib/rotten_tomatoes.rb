@@ -10,13 +10,13 @@ module RottenTomatoes
     base.extend(ClassMethods)
   end
 
-  def get(id)
+  def get_from_rt(id)
     JSON.parse(HTTParty.get(URI.escape("#{BASE_URL}/movies/#{id}.json?apikey=#{API_KEY}")))
   end
 
   module ClassMethods
-    def search(q)
-      JSON.parse(HTTParty.get(URI.escape("#{BASE_URL}/movies.json?apikey=#{API_KEY}&q=#{q}")))
+    def search_rt(q)
+      JSON.parse(HTTParty.get(URI.escape("#{BASE_URL}/movies.json?apikey=#{API_KEY}&q=#{q}")))["movies"]
     end
   end
 

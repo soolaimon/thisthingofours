@@ -3,6 +3,8 @@ class AddMoreRtColumnsToMovie < ActiveRecord::Migration
     add_column :movies, :release_year, :integer 
     add_column :movies, :critics_score, :integer
     add_column :movies, :mpaa_rating, :string
+    add_column :movies, :rt_poster_detailed, :string
+    add_column :movies, :rt_poster_original, :string
     add_column :movies, :rt_synopsis, :text 
     add_column :movies, :imdb_id, :string 
     add_column :movies, :rt_link, :string

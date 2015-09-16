@@ -10,6 +10,8 @@ class Movie < ActiveRecord::Base
       rt_id: params.delete("id"),
       rt_poster_profile: params["posters"]["profile"],
       rt_poster_thumb: params["posters"]["thumbnail"],
+      rt_poster_detailed: params["posters"]["detailed"],
+      rt_poster_original: params["posters"]["original"],
       release_year: params["year"],
       critics_score: params["ratings"]["critics_score"],
       rt_synopsis: params["synopsis"],

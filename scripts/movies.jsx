@@ -17,6 +17,7 @@ var MovieList = React.createClass({
     }); 
   }, 
   componentDidMount: function () {
+    document.title = this.props.thing.name || 'This Thing of Ours';
     this.getMoviesFromServer();
   },
   render: function () {

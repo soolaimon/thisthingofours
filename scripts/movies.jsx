@@ -29,6 +29,7 @@ var MovieList = React.createClass({
 
     return (
       <div className="container">
+        <h1>{ this.props.thing.name}</h1>
         { movieNodes }
       </div>
     );
@@ -39,7 +40,7 @@ var MovieTile = React.createClass({
   render: function () {
     return (
       <div className="movie-tile col-md-3">
-      <img src={ this.props.movie.rt_poster_thumb}></img>
+      <img src={ this.props.movie.rt_poster_detailed}></img>
         <h4>{ this.props.movie.title }</h4>
         <p>{ this.props.movie.description }</p>
       </div>

@@ -2,6 +2,9 @@ var MovieList = React.createClass({displayName: "MovieList",
   getInitialState: function () {
       return { data: [] };
   },
+  thingIsCurrent: function() {
+    return this.props.thing.id === new Date().getFullYear();
+  },
   getMoviesFromServer: function () {
     $.ajax({
       url: this.props.url,

@@ -31,6 +31,17 @@ var MovieList = React.createClass({displayName: "MovieList",
       ); 
     });
 
+    if (this.thingIsCurrent()) {
+      movieNodes.push(
+      React.createElement("div", {className: "movie-tile col-md-3 new-movie-tile"}, 
+        React.createElement("i", {className: "fa fa-plus fa-5x"})
+      )
+
+      )
+    }
+
+
+
     return (
       React.createElement("div", {className: "container"}, 
         React.createElement("h1", null,  this.props.thing.name), 

@@ -31,6 +31,17 @@ var MovieList = React.createClass({
       ); 
     });
 
+    if (this.thingIsCurrent()) {
+      movieNodes.push(
+      <div className="movie-tile col-md-3 new-movie-tile">
+        <i className="fa fa-plus fa-5x"></i>
+      </div>
+
+      )
+    }
+
+
+
     return (
       <div className="container">
         <h1>{ this.props.thing.name}</h1>

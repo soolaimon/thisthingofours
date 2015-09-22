@@ -74,7 +74,7 @@ module.exports = function(grunt) {
     wiredep: {
       task: {
         src: [
-          'views/index.html',
+          'views/layout.erb',
           'styles/styles.scss'
         ]
       }

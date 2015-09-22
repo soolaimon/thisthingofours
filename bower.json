@@ -17,6 +17,7 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "font-awesome": "~4.4.0",
-    "react": "~0.13.3"
+    "react": "~0.13.3",
+    "react-modal": "~0.3.0"
   }
 }

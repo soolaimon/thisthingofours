@@ -33,10 +33,8 @@ var MovieList = React.createClass({
 
     if (this.thingIsCurrent()) {
       movieNodes.push(
-      <div className="movie-tile col-md-3 new-movie-tile">
-        <i className="fa fa-plus fa-5x"></i>
-      </div>
-
+        <MovieTile>
+        </MovieTile>
       )
     }
 
@@ -52,13 +50,28 @@ var MovieList = React.createClass({
 });
 
 var MovieTile = React.createClass({
+  addMovie: function () {
+    console.log("add movie");
+  },
+  showMovieDetails: function () {
+    console.log("NEED TO SHOW DETAILS, YO")
+  },
   render: function () {
-    return (
-      <div className="movie-tile col-md-3">
-      <img src={ this.props.movie.rt_poster_detailed}></img>
-        <h4>{ this.props.movie.title }</h4>
-        <p>{ this.props.movie.description }</p>
-      </div>
-    );
+    if (this.props.movie) {
+      return (
+        <div onClick={this.showMovieDetails}className="movie-tile col-md-3">
+        <img src={ this.props.movie.rt_poster_detailed}></img>
+          <h4>{ this.props.movie.title }</h4>
+          <p>{ this.props.movie.description }</p>
+        </div>
+      );
+    } else {
+      return(
+        <div onClick={this.addMovie} className="movie-tile col-md-3 new-movie-tile">
+          <i className="fa fa-plus fa-5x"></i>
+        </div>
+      );
+    }
   }
 });
+

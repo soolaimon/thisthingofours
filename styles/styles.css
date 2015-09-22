@@ -7811,7 +7811,8 @@ button.close {
 
 #movie-list .movie-tile {
   min-height: 300px;
-  border: 1px solid #eee; }
+  border: 1px solid #eee;
+  cursor: pointer; }
   #movie-list .movie-tile.new-movie-tile {
     text-align: center; }
 

@@ -2,6 +2,7 @@
   .movie-tile {
     min-height: 300px;
     border: 1px solid #eee;
+    cursor: pointer;
     &.new-movie-tile {
       text-align: center;
     }

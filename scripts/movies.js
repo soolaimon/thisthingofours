@@ -33,10 +33,8 @@ var MovieList = React.createClass({displayName: "MovieList",
 
     if (this.thingIsCurrent()) {
       movieNodes.push(
-      React.createElement("div", {className: "movie-tile col-md-3 new-movie-tile"}, 
-        React.createElement("i", {className: "fa fa-plus fa-5x"})
-      )
-
+        React.createElement(MovieTile, null
+        )
       )
     }
 
@@ -52,13 +50,28 @@ var MovieList = React.createClass({displayName: "MovieList",
 });
 
 var MovieTile = React.createClass({displayName: "MovieTile",
+  addMovie: function () {
+    console.log("add movie");
+  },
+  showMovieDetails: function () {
+    console.log("NEED TO SHOW DETAILS, YO")
+  },
   render: function () {
-    return (
-      React.createElement("div", {className: "movie-tile col-md-3"}, 
-      React.createElement("img", {src:  this.props.movie.rt_poster_detailed}), 
-        React.createElement("h4", null,  this.props.movie.title), 
-        React.createElement("p", null,  this.props.movie.description)
-      )
-    );
+    if (this.props.movie) {
+      return (
+        React.createElement("div", {onClick: this.showMovieDetails, className: "movie-tile col-md-3"}, 
+        React.createElement("img", {src:  this.props.movie.rt_poster_detailed}), 
+          React.createElement("h4", null,  this.props.movie.title), 
+          React.createElement("p", null,  this.props.movie.description)
+        )
+      );
+    } else {
+      return(
+        React.createElement("div", {onClick: this.addMovie, className: "movie-tile col-md-3 new-movie-tile"}, 
+          React.createElement("i", {className: "fa fa-plus fa-5x"})
+        )
+      );
+    }
   }
 });
+

@@ -52,6 +52,35 @@ var MovieList = React.createClass({
 });
 
 var MovieForm = React.createClass({
+  search: function () {
+    var query = React.findDOMNode(this.refs.title).value
+    if (query.length < 3) {
+      return;
+    }
+
+    $.ajax({
+      url: this.props.url,
+      dataType: 'json',
+      type: 'GET',
+      data: {query: query},
+      success: function(data) {
+        console.log(data);
+        this.setState({data: data})
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.error(this.props.url, status, err.toString());
+      }.bind(this)
+    });
+  },
+
+  render: function () {
+    return(
+      <div>
+        <input className="form-control" type="text" ref="title" onKeyUp={this.search} placeholder="Search Film"/>
+        <input type="hidden" ref="rt_id"/>
+      </div>
+    );
+  }
 
 });
 
@@ -105,7 +134,7 @@ var MovieTile = React.createClass({
                 <h1>Add a Movie</h1>
               </div>
               <div className="modal-body">
-                <MovieForm thing={this.props.thing}>
+                <MovieForm thing_id={this.props.thing.id} url='/movie_search'>
                 </MovieForm>
               </div>
             </div>

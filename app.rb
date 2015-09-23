@@ -21,3 +21,7 @@ end
 get '/things/:id/movies.json' do
   json Thing.find(params[:id]).movies
 end
+
+get '/movie_search' do
+  json Movie.search_rt(params[:query])
+end

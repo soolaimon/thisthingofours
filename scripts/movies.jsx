@@ -51,7 +51,18 @@ var MovieList = React.createClass({
   }
 });
 
+var MovieResult = React.createClass({
+  render: function () {
+    return (
+      <li className="movie-result">{this.props.movie.title}</li>
+    );
+  }
+});
+
 var MovieForm = React.createClass({
+  getInitialState: function () {
+    return {movie_id: null, data: []}
+  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
     if (query.length < 3) {
@@ -64,7 +75,6 @@ var MovieForm = React.createClass({
       type: 'GET',
       data: {query: query},
       success: function(data) {
-        console.log(data);
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err) {
@@ -73,16 +83,33 @@ var MovieForm = React.createClass({
     });
   },
 
+  setMovie: function (id) {
+    this.setState({movie_id: id})
+  },
+
   render: function () {
+    var results = this.state.data.map(function(movie, index) {
+      return (
+        <MovieResult movie={movie}></MovieResult>
+      );
+    });
     return(
       <div>
-        <input className="form-control" type="text" ref="title" onKeyUp={this.search} placeholder="Search Film"/>
-        <input type="hidden" ref="rt_id"/>
+        <div>
+          <input className="form-control" type="text" ref="title" onKeyUp={this.search} placeholder="Search Film"/>
+          <input type="hidden" ref="rt_id" value={this.state.movie_id}/>
+        </div>
+        <div>
+          <ul>
+            {results}
+          </ul>
+        </div>
       </div>
     );
   }
 
 });
+
 
 var MovieTile = React.createClass({
   getInitialState: function() {

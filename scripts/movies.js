@@ -51,7 +51,18 @@ var MovieList = React.createClass({displayName: "MovieList",
   }
 });
 
+var MovieResult = React.createClass({displayName: "MovieResult",
+  render: function () {
+    return (
+      React.createElement("li", {className: "movie-result"}, this.props.movie.title)
+    );
+  }
+});
+
 var MovieForm = React.createClass({displayName: "MovieForm",
+  getInitialState: function () {
+    return {movie_id: null, data: []}
+  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
     if (query.length < 3) {
@@ -64,7 +75,6 @@ var MovieForm = React.createClass({displayName: "MovieForm",
       type: 'GET',
       data: {query: query},
       success: function(data) {
-        console.log(data);
         this.setState({data: data})
       }.bind(this),
       error: function(xhr, status, err) {
@@ -73,16 +83,33 @@ var MovieForm = React.createClass({displayName: "MovieForm",
     });
   },
 
+  setMovie: function (id) {
+    this.setState({movie_id: id})
+  },
+
   render: function () {
+    var results = this.state.data.map(function(movie, index) {
+      return (
+        React.createElement(MovieResult, {movie: movie})
+      );
+    });
     return(
       React.createElement("div", null, 
-        React.createElement("input", {className: "form-control", type: "text", ref: "title", onKeyUp: this.search, placeholder: "Search Film"}), 
-        React.createElement("input", {type: "hidden", ref: "rt_id"})
+        React.createElement("div", null, 
+          React.createElement("input", {className: "form-control", type: "text", ref: "title", onKeyUp: this.search, placeholder: "Search Film"}), 
+          React.createElement("input", {type: "hidden", ref: "rt_id", value: this.state.movie_id})
+        ), 
+        React.createElement("div", null, 
+          React.createElement("ul", null, 
+            results
+          )
+        )
       )
     );
   }
 
 });
+
 
 var MovieTile = React.createClass({displayName: "MovieTile",
   getInitialState: function() {

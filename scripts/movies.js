@@ -35,7 +35,7 @@ var MovieList = React.createClass({displayName: "MovieList",
 
     if (this.thingIsCurrent()) {
       movieNodes.push(
-        React.createElement(MovieTile, null
+        React.createElement(MovieTile, {thing: this.props.thing}
         )
       )
     }
@@ -49,6 +49,10 @@ var MovieList = React.createClass({displayName: "MovieList",
       )
     );
   }
+});
+
+var MovieForm = React.createClass({displayName: "MovieForm",
+
 });
 
 var MovieTile = React.createClass({displayName: "MovieTile",
@@ -67,26 +71,10 @@ var MovieTile = React.createClass({displayName: "MovieTile",
   render: function () {
     const modalStyles = {
       overlay : {
-        position          : 'fixed',
-        top               : 0,
-        left              : 0,
-        right             : 0,
-        bottom            : 0,
-        backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+        position        : 'fixed',
+        backgroundColor : '#eee'
       },
       content : {
-        position                   : 'absolute',
-        top                        : '40px',
-        left                       : '40px',
-        right                      : '40px',
-        bottom                     : '40px',
-        border                     : '1px solid #ccc',
-        background                 : '#fff',
-        overflow                   : 'auto',
-        WebkitOverflowScrolling    : 'touch',
-        borderRadius               : '4px',
-        outline                    : 'none',
-        padding                    : '20px'
 
       }
     }
@@ -102,18 +90,25 @@ var MovieTile = React.createClass({displayName: "MovieTile",
         )
       );
     } else {
-      console.log(modalStyles);
       return(
         React.createElement("div", null, 
           React.createElement("div", {onClick: this.openModal, className: "movie-tile col-md-3 new-movie-tile"}, 
             React.createElement("i", {className: "fa fa-plus fa-5x"})
           ), 
           React.createElement(Modal, {
+            thing: this.props.thing, 
             isOpen: this.state.modalIsOpen, 
             onRequestClose: this.closeModal, 
-            style: modalStyles
-          }, 
-            React.createElement("h1", null, "HELLO MODAL")
+            style: modalStyles}, 
+            React.createElement("div", {className: "modal-content"}, 
+              React.createElement("div", {className: "modal-header"}, 
+                React.createElement("h1", null, "Add a Movie")
+              ), 
+              React.createElement("div", {className: "modal-body"}, 
+                React.createElement(MovieForm, {thing: this.props.thing}
+                )
+              )
+            )
           )
         )
       );

@@ -351,7 +351,7 @@ exports.teardownScopedFocus = function() {
 
 },{"../helpers/tabbable":7}],5:[function(require,module,exports){
 module.exports = function() {
-  injectStyle([
+  kctStyle([
     '.ReactModal__Overlay {',
     '  background-color: rgba(255, 255, 255, 0.75);',
     '}',
@@ -382,6 +382,7 @@ module.exports = function() {
 };
 
 function injectStyle(css) {
+
   var style = document.getElementById('rackt-style');
   if (!style) {
     style = document.createElement('style');

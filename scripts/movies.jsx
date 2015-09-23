@@ -35,7 +35,7 @@ var MovieList = React.createClass({
 
     if (this.thingIsCurrent()) {
       movieNodes.push(
-        <MovieTile>
+        <MovieTile thing={this.props.thing}>
         </MovieTile>
       )
     }
@@ -49,6 +49,10 @@ var MovieList = React.createClass({
       </div>
     );
   }
+});
+
+var MovieForm = React.createClass({
+
 });
 
 var MovieTile = React.createClass({
@@ -67,26 +71,10 @@ var MovieTile = React.createClass({
   render: function () {
     const modalStyles = {
       overlay : {
-        position          : 'fixed',
-        top               : 0,
-        left              : 0,
-        right             : 0,
-        bottom            : 0,
-        backgroundColor   : 'rgba(255, 255, 255, 0.75)'
+        position        : 'fixed',
+        backgroundColor : '#eee'
       },
       content : {
-        position                   : 'absolute',
-        top                        : '40px',
-        left                       : '40px',
-        right                      : '40px',
-        bottom                     : '40px',
-        border                     : '1px solid #ccc',
-        background                 : '#fff',
-        overflow                   : 'auto',
-        WebkitOverflowScrolling    : 'touch',
-        borderRadius               : '4px',
-        outline                    : 'none',
-        padding                    : '20px'
 
       }
     }
@@ -102,18 +90,25 @@ var MovieTile = React.createClass({
         </div>
       );
     } else {
-      console.log(modalStyles);
       return(
         <div>
           <div onClick={this.openModal} className="movie-tile col-md-3 new-movie-tile">
             <i className="fa fa-plus fa-5x"></i>
           </div>
           <Modal
+            thing={this.props.thing}
             isOpen={this.state.modalIsOpen}
             onRequestClose={this.closeModal}
-            style={modalStyles}
-          >
-            <h1>HELLO MODAL</h1>
+            style={modalStyles}>
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1>Add a Movie</h1>
+              </div>
+              <div className="modal-body">
+                <MovieForm thing={this.props.thing}>
+                </MovieForm>
+              </div>
+            </div>
           </Modal>
         </div>
       );

@@ -1,3 +1,5 @@
+$result-height: 80px;
+
 #movie-list {
   .movie-tile {
     min-height: 300px;
@@ -6,5 +8,18 @@
     &.new-movie-tile {
       text-align: center;
     }
+  }
+}
+
+
+li.movie-result {
+  list-style-type: none;
+  border: 1px solid #eee;
+  min-height: $result-height;
+  display: block;
+  .movie-thumb {
+    height: $result-height;
+    display: block;
+    float: left;
   }
 }

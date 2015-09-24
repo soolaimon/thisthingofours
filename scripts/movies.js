@@ -53,8 +53,15 @@ var MovieList = React.createClass({displayName: "MovieList",
 
 var MovieResult = React.createClass({displayName: "MovieResult",
   render: function () {
+    var cast = this.props.movie.abridged_cast.map(function(member, index){
+      return member["name"]
+    }).join(" , ");
     return (
-      React.createElement("li", {className: "movie-result"}, this.props.movie.title)
+      React.createElement("li", {className: "movie-result"}, 
+        React.createElement("img", {className: "movie-thumb", src: this.props.movie.posters.thumbnail}), 
+        React.createElement("h4", null, this.props.movie.title, " (", this.props.movie.year, ")"), 
+        React.createElement("p", null, cast)
+      )
     );
   }
 });

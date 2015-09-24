@@ -53,8 +53,15 @@ var MovieList = React.createClass({
 
 var MovieResult = React.createClass({
   render: function () {
+    var cast = this.props.movie.abridged_cast.map(function(member, index){
+      return member["name"]
+    }).join(" , ");
     return (
-      <li className="movie-result">{this.props.movie.title}</li>
+      <li className="movie-result">
+        <img className="movie-thumb" src={this.props.movie.posters.thumbnail}></img>
+        <h4>{this.props.movie.title} ({this.props.movie.year})</h4>
+        <p>{cast}</p>
+      </li>
     );
   }
 });

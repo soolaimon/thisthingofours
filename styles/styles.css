@@ -7816,15 +7816,20 @@ button.close {
   #movie-list .movie-tile.new-movie-tile {
     text-align: center; }
 
-li.movie-result {
-  list-style-type: none;
-  border: 1px solid #eee;
-  min-height: 80px;
-  display: block; }
-  li.movie-result .movie-thumb {
-    height: 80px;
+ul.result-list {
+  overflow: scroll; }
+  ul.result-list li.movie-result {
+    list-style-type: none;
+    border: 1px solid #eee;
+    min-height: 80px;
     display: block;
-    float: left; }
+    cursor: pointer; }
+    ul.result-list li.movie-result:hover {
+      background: #cccccc; }
+    ul.result-list li.movie-result .movie-thumb {
+      height: 80px;
+      display: block;
+      float: left; }
 
 #thing-sidebar .timeline-year {
   cursor: pointer; }

@@ -12,14 +12,21 @@ $result-height: 80px;
 }
 
 
-li.movie-result {
-  list-style-type: none;
-  border: 1px solid #eee;
-  min-height: $result-height;
-  display: block;
-  .movie-thumb {
-    height: $result-height;
+ul.result-list {
+  overflow: scroll;
+  li.movie-result {
+    list-style-type: none;
+    border: 1px solid #eee;
+    min-height: $result-height;
     display: block;
-    float: left;
+    cursor: pointer;
+    &:hover {
+      background: darken(#fff, 20);
+    }
+    .movie-thumb {
+      height: $result-height;
+      display: block;
+      float: left;
+    }
   }
 }

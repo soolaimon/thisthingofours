@@ -1,5 +1,6 @@
 var Modal = ReactModal;
 Modal.setAppElement(document.body);
+
 var MovieList = React.createClass({displayName: "MovieList",
   getInitialState: function () {
       return { data: [] };
@@ -40,8 +41,6 @@ var MovieList = React.createClass({displayName: "MovieList",
       )
     }
 
-
-
     return (
       React.createElement("div", {className: "container"}, 
         React.createElement("h1", null,  this.props.thing.name), 
@@ -52,13 +51,16 @@ var MovieList = React.createClass({displayName: "MovieList",
 });
 
 var MovieResult = React.createClass({displayName: "MovieResult",
+  handleClick: function () {
+    this.props.movieSet(this.props.movie.id)
+  },
   render: function () {
     var cast = this.props.movie.abridged_cast.map(function(member, index){
       return member["name"]
     }).join(" , ");
     return (
-      React.createElement("li", {className: "movie-result"}, 
-        React.createElement("img", {className: "movie-thumb", src: this.props.movie.posters.thumbnail}), 
+      React.createElement("li", {onClick: this.handleClick, className: "movie-result"}, 
+        React.createElement("img", {className: "movie-thumb", src: this.props.movie.posters.original}), 
         React.createElement("h4", null, this.props.movie.title, " (", this.props.movie.year, ")"), 
         React.createElement("p", null, cast)
       )
@@ -70,6 +72,9 @@ var MovieForm = React.createClass({displayName: "MovieForm",
   getInitialState: function () {
     return {movie_id: null, data: []}
   },
+  setMovie: function(id) {
+    this.setState({movie_id: id})
+ },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
     if (query.length < 3) {
@@ -90,16 +95,15 @@ var MovieForm = React.createClass({displayName: "MovieForm",
     });
   },
 
-  setMovie: function (id) {
-    this.setState({movie_id: id})
-  },
 
   render: function () {
+    var form = this
     var results = this.state.data.map(function(movie, index) {
       return (
-        React.createElement(MovieResult, {movie: movie})
+
+        React.createElement(MovieResult, {movieSet: form.setMovie, movie: movie})
       );
-    });
+    })
     return(
       React.createElement("div", null, 
         React.createElement("div", null, 
@@ -107,7 +111,7 @@ var MovieForm = React.createClass({displayName: "MovieForm",
           React.createElement("input", {type: "hidden", ref: "rt_id", value: this.state.movie_id})
         ), 
         React.createElement("div", null, 
-          React.createElement("ul", null, 
+          React.createElement("ul", {className: "result-list"}, 
             results
           )
         )

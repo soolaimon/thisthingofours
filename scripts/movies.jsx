@@ -1,5 +1,6 @@
 var Modal = ReactModal;
 Modal.setAppElement(document.body);
+
 var MovieList = React.createClass({
   getInitialState: function () {
       return { data: [] };
@@ -40,8 +41,6 @@ var MovieList = React.createClass({
       )
     }
 
-
-
     return (
       <div className="container">
         <h1>{ this.props.thing.name}</h1>
@@ -52,13 +51,16 @@ var MovieList = React.createClass({
 });
 
 var MovieResult = React.createClass({
+  handleClick: function () {
+    this.props.movieSet(this.props.movie.id)
+  },
   render: function () {
     var cast = this.props.movie.abridged_cast.map(function(member, index){
       return member["name"]
     }).join(" , ");
     return (
-      <li className="movie-result">
-        <img className="movie-thumb" src={this.props.movie.posters.thumbnail}></img>
+      <li onClick={this.handleClick} className="movie-result">
+        <img className="movie-thumb" src={this.props.movie.posters.original}></img>
         <h4>{this.props.movie.title} ({this.props.movie.year})</h4>
         <p>{cast}</p>
       </li>
@@ -70,6 +72,9 @@ var MovieForm = React.createClass({
   getInitialState: function () {
     return {movie_id: null, data: []}
   },
+  setMovie: function(id) {
+    this.setState({movie_id: id})
+ },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
     if (query.length < 3) {
@@ -90,16 +95,15 @@ var MovieForm = React.createClass({
     });
   },
 
-  setMovie: function (id) {
-    this.setState({movie_id: id})
-  },
 
   render: function () {
+    var form = this
     var results = this.state.data.map(function(movie, index) {
       return (
-        <MovieResult movie={movie}></MovieResult>
+
+        <MovieResult movieSet={form.setMovie} movie={movie}></MovieResult>
       );
-    });
+    })
     return(
       <div>
         <div>
@@ -107,7 +111,7 @@ var MovieForm = React.createClass({
           <input type="hidden" ref="rt_id" value={this.state.movie_id}/>
         </div>
         <div>
-          <ul>
+          <ul className="result-list">
             {results}
           </ul>
         </div>
@@ -144,7 +148,7 @@ var MovieTile = React.createClass({
     if (this.props.movie) {
       return (
         <div>
-          <div onClick={this.showMovieDetails}className="movie-tile col-md-3">
+          <div onClick={this.showMovieDetails} className="movie-tile col-md-3">
           <img src={ this.props.movie.rt_poster_detailed}></img>
             <h4>{ this.props.movie.title }</h4>
             <p>{ this.props.movie.description }</p>

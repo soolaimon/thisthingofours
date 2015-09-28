@@ -70,10 +70,11 @@ var MovieResult = React.createClass({displayName: "MovieResult",
 
 var MovieForm = React.createClass({displayName: "MovieForm",
   getInitialState: function () {
-    return {movie_id: null, data: []}
+    return {movie_id: null, results: []}
   },
   setMovie: function(id) {
-    this.setState({movie_id: id})
+    this.setState({movie_id: id});
+    this.setState({results: []});
  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
@@ -87,7 +88,7 @@ var MovieForm = React.createClass({displayName: "MovieForm",
       type: 'GET',
       data: {query: query},
       success: function(data) {
-        this.setState({data: data})
+        this.setState({results: data})
       }.bind(this),
       error: function(xhr, status, err) {
         console.error(this.props.url, status, err.toString());
@@ -98,7 +99,7 @@ var MovieForm = React.createClass({displayName: "MovieForm",
 
   render: function () {
     var form = this
-    var results = this.state.data.map(function(movie, index) {
+    var results = this.state.results.map(function(movie, index) {
       return (
 
         React.createElement(MovieResult, {movieSet: form.setMovie, movie: movie})

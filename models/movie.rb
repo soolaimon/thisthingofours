@@ -5,7 +5,7 @@ class Movie < ActiveRecord::Base
 
   belongs_to :thing
 
-  def update_rt_attributes(params = nil)
+  def assign_rt_attributes(params = nil)
     params = params || Movie.get_from_rt(rt_id)
     rt_attributes = {
       rt_id: params.delete("id"),
@@ -17,12 +17,11 @@ class Movie < ActiveRecord::Base
       critics_score: params["ratings"]["critics_score"],
       rt_synopsis: params["synopsis"],
       rt_link: params["links"]["alternate"],
-      imdb_id: params["alternate_ids"]["imdb"],
       director: params["abridged_directors"]
     }
 
     params.each_pair { |k, v| rt_attributes[k.to_sym] = v if self.respond_to?(k.to_sym) }
-    update_attributes(rt_attributes)
+    assign_attributes(rt_attributes)
   end
 
 end

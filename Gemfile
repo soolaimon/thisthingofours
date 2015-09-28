@@ -14,6 +14,7 @@ group :development do
  gem "tux"
  gem "awesome_print"
  gem "dotenv"
+ gem "pry"
 end
 
 group :production do

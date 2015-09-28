@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150913204412) do
+ActiveRecord::Schema.define(version: 20150928042743) do
 
   create_table "movies", force: :cascade do |t|
     t.string   "title"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20150913204412) do
     t.string   "rt_link"
     t.integer  "runtime"
     t.string   "director",           default: "--- []\n"
+    t.string   "cast",               default: "--- []\n"
   end
 
   create_table "things", force: :cascade do |t|

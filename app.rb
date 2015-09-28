@@ -4,6 +4,7 @@ require './environments'
 require 'sinatra/json'
 require './models/movie'
 require './models/thing'
+require 'pry'
 
 
 get '/' do
@@ -23,5 +24,12 @@ get '/things/:id/movies.json' do
 end
 
 get '/movie_search' do
-  json Movie.search_rt(params[:query])
+  movies = Movie.search_rt(params[:query])
+  movies.map! do |m| 
+    movie = Movie.new
+    movie.assign_rt_attributes(m)
+    movie
+  end
+  json movies
 end
+

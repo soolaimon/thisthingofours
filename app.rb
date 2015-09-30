@@ -6,7 +6,6 @@ require './models/movie'
 require './models/thing'
 require 'pry'
 
-
 get '/' do
   erb :index
 end

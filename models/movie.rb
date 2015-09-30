@@ -17,7 +17,8 @@ class Movie < ActiveRecord::Base
       critics_score: params["ratings"]["critics_score"],
       rt_synopsis: params["synopsis"],
       rt_link: params["links"]["alternate"],
-      director: params["abridged_directors"]
+      director: params["abridged_directors"],
+      cast: params["abridged_cast"]
     }
 
     params.each_pair { |k, v| rt_attributes[k.to_sym] = v if self.respond_to?(k.to_sym) }

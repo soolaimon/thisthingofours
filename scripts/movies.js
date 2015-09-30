@@ -15,7 +15,6 @@ var MovieList = React.createClass({displayName: "MovieList",
       cache: false,
       type: 'GET',
       success: function (data){
-        console.log(data);
         this.setState({data: data});
       }.bind(this),
       error: function (xhr, status, err) {
@@ -53,10 +52,10 @@ var MovieList = React.createClass({displayName: "MovieList",
 
 var MovieResult = React.createClass({displayName: "MovieResult",
   handleClick: function () {
-    this.props.movieSet(this.props.movie.id)
+    this.props.movieSet(this.props.movie.rt_id)
   },
   render: function () {
-    var cast = this.props.movie.cast.map(function(member, index){
+    var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
       return member["name"]
     }).join(" , ");
     return (
@@ -74,8 +73,7 @@ var MovieForm = React.createClass({displayName: "MovieForm",
     return {movie_id: null, results: []}
   },
   setMovie: function(id) {
-    this.setState({movie_id: id});
-    this.setState({results: []});
+    this.setState({movie_id: id, results: []});
  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value

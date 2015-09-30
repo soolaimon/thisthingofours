@@ -7816,6 +7816,8 @@ button.close {
   padding: 2px; }
   .movie-tile.new-movie-tile {
     text-align: center; }
+  .movie-tile:hover {
+    background: #cccccc; }
 
 ul.result-list {
   overflow: scroll; }
@@ -7825,8 +7827,6 @@ ul.result-list {
     min-height: 80px;
     display: block;
     cursor: pointer; }
-    ul.result-list li.movie-result:hover {
-      background: #cccccc; }
     ul.result-list li.movie-result .movie-thumb {
       height: 80px;
       display: block;

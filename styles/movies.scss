@@ -8,6 +8,10 @@ $result-height: 80px;
   &.new-movie-tile {
     text-align: center;
   }
+  &:hover {
+    background: darken(#fff, 20);
+  }
+
 }
 
 
@@ -19,9 +23,6 @@ ul.result-list {
     min-height: $result-height;
     display: block;
     cursor: pointer;
-    &:hover {
-      background: darken(#fff, 20);
-    }
     .movie-thumb {
       height: $result-height;
       display: block;

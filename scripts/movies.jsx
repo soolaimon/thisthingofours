@@ -60,7 +60,7 @@ var MovieResult = React.createClass({
     }).join(" , ");
     return (
       <li onClick={this.handleClick} className="movie-result">
-        <img className="movie-thumb" src={this.props.movie_rt_poster_original}></img>
+        <img className="movie-thumb" src={this.props.movie.rt_poster_original}></img>
         <h4>{this.props.movie.title} ({this.props.movie.release_year})</h4>
         <p>{cast}</p>
       </li>

@@ -60,7 +60,7 @@ var MovieResult = React.createClass({displayName: "MovieResult",
     }).join(" , ");
     return (
       React.createElement("li", {onClick: this.handleClick, className: "movie-result"}, 
-        React.createElement("img", {className: "movie-thumb", src: this.props.movie_rt_poster_original}), 
+        React.createElement("img", {className: "movie-thumb", src: this.props.movie.rt_poster_original}), 
         React.createElement("h4", null, this.props.movie.title, " (", this.props.movie.release_year, ")"), 
         React.createElement("p", null, cast)
       )

@@ -1,13 +1,12 @@
 $result-height: 80px;
 
-#movie-list {
-  .movie-tile {
-    min-height: 300px;
-    border: 1px solid #eee;
-    cursor: pointer;
-    &.new-movie-tile {
-      text-align: center;
-    }
+.movie-tile {
+  min-height: 300px;
+  border: 1px solid #eee;
+  cursor: pointer;
+  padding: 2px;
+  &.new-movie-tile {
+    text-align: center;
   }
 }
 

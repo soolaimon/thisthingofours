@@ -50,24 +50,6 @@ var MovieList = React.createClass({displayName: "MovieList",
   }
 });
 
-var MovieResult = React.createClass({displayName: "MovieResult",
-  handleClick: function () {
-    this.props.movieSet(this.props.movie.rt_id)
-  },
-  render: function () {
-    var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
-      return member["name"]
-    }).join(" , ");
-    return (
-      React.createElement("li", {onClick: this.handleClick, className: "movie-result"}, 
-        React.createElement("img", {className: "movie-thumb", src: this.props.movie.rt_poster_original}), 
-        React.createElement("h4", null, this.props.movie.title, " (", this.props.movie.release_year, ")"), 
-        React.createElement("p", null, cast)
-      )
-    );
-  }
-});
-
 var MovieForm = React.createClass({displayName: "MovieForm",
   getInitialState: function () {
     return {movie_id: null, results: []}
@@ -100,8 +82,7 @@ var MovieForm = React.createClass({displayName: "MovieForm",
     var form = this;
     var results = this.state.results.map(function(movie, index) {
       return (
-
-        React.createElement(MovieResult, {movieSet: form.setMovie, movie: movie})
+        React.createElement(MovieTile, {movieSet: form.setMovie, movie: movie})
       );
     })
     return(
@@ -132,6 +113,15 @@ var MovieTile = React.createClass({displayName: "MovieTile",
   closeModal: function() {
     this.setState({modalIsOpen: false});
   },
+  handleClick: function() {
+    if (this.props.movieSet) {
+      this.props.movieSet(this.props.movieSet(this.props.movie.rt_id));
+    }
+    else {
+      showMovieDetails();
+    }
+
+  },
   showMovieDetails: function () {
     console.log("NEED TO SHOW DETAILS, YO")
   },
@@ -145,13 +135,19 @@ var MovieTile = React.createClass({displayName: "MovieTile",
 
       }
     }
+    console.log(this.props.movie);
     if (this.props.movie) {
+
+      var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
+        return member["name"]
+      }).join(" , ");
+
       return (
         React.createElement("div", null, 
-          React.createElement("div", {onClick: this.showMovieDetails, className: "movie-tile col-md-3"}, 
+          React.createElement("div", {onClick: this.handleClick, className: "movie-tile col-md-3"}, 
           React.createElement("img", {src:  this.props.movie.rt_poster_detailed}), 
-            React.createElement("h4", null,  this.props.movie.title), 
-            React.createElement("p", null,  this.props.movie.description)
+            React.createElement("h4", null,  this.props.movie.title, " (", this.props.movie.release_year, ")"), 
+            React.createElement("p", null, cast)
           )
 
         )

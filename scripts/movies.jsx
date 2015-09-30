@@ -50,24 +50,6 @@ var MovieList = React.createClass({
   }
 });
 
-var MovieResult = React.createClass({
-  handleClick: function () {
-    this.props.movieSet(this.props.movie.rt_id)
-  },
-  render: function () {
-    var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
-      return member["name"]
-    }).join(" , ");
-    return (
-      <li onClick={this.handleClick} className="movie-result">
-        <img className="movie-thumb" src={this.props.movie.rt_poster_original}></img>
-        <h4>{this.props.movie.title} ({this.props.movie.release_year})</h4>
-        <p>{cast}</p>
-      </li>
-    );
-  }
-});
-
 var MovieForm = React.createClass({
   getInitialState: function () {
     return {movie_id: null, results: []}
@@ -100,8 +82,7 @@ var MovieForm = React.createClass({
     var form = this;
     var results = this.state.results.map(function(movie, index) {
       return (
-
-        <MovieResult movieSet={form.setMovie} movie={movie}></MovieResult>
+        <MovieTile movieSet={form.setMovie} movie={movie}></MovieTile>
       );
     })
     return(
@@ -132,6 +113,15 @@ var MovieTile = React.createClass({
   closeModal: function() {
     this.setState({modalIsOpen: false});
   },
+  handleClick: function() {
+    if (this.props.movieSet) {
+      this.props.movieSet(this.props.movieSet(this.props.movie.rt_id));
+    }
+    else {
+      showMovieDetails();
+    }
+
+  },
   showMovieDetails: function () {
     console.log("NEED TO SHOW DETAILS, YO")
   },
@@ -145,13 +135,19 @@ var MovieTile = React.createClass({
 
       }
     }
+    console.log(this.props.movie);
     if (this.props.movie) {
+
+      var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
+        return member["name"]
+      }).join(" , ");
+
       return (
         <div>
-          <div onClick={this.showMovieDetails} className="movie-tile col-md-3">
+          <div onClick={this.handleClick} className="movie-tile col-md-3">
           <img src={ this.props.movie.rt_poster_detailed}></img>
-            <h4>{ this.props.movie.title }</h4>
-            <p>{ this.props.movie.description }</p>
+            <h4>{ this.props.movie.title } ({this.props.movie.release_year})</h4>
+            <p>{cast}</p>
           </div>
 
         </div>

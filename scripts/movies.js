@@ -52,10 +52,10 @@ var MovieList = React.createClass({displayName: "MovieList",
 
 var MovieForm = React.createClass({displayName: "MovieForm",
   getInitialState: function () {
-    return {movie_id: null, results: []}
+    return {movie: null, results: []}
   },
-  setMovie: function(id) {
-    this.setState({movie_id: id, results: []});
+  setMovie: function(movie) {
+    this.setState({movie: movie, results: []});
  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
@@ -115,7 +115,7 @@ var MovieTile = React.createClass({displayName: "MovieTile",
   },
   handleClick: function() {
     if (this.props.movieSet) {
-      this.props.movieSet(this.props.movieSet(this.props.movie.rt_id));
+      this.props.movieSet(this.props.movie);
     }
     else {
       showMovieDetails();

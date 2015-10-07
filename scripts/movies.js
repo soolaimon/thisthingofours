@@ -55,7 +55,9 @@ var MovieForm = React.createClass({displayName: "MovieForm",
     return {movie: null, results: []}
   },
   setMovie: function(movie) {
-    this.setState({movie: movie, results: []});
+    if (confirm('Do you want to add ' + movie.title + ' to ' + this.props.thing.name)) {
+      this.setState({movie: movie, results: []});
+    }
  },
   search: function () {
     var query = React.findDOMNode(this.refs.title).value
@@ -135,7 +137,6 @@ var MovieTile = React.createClass({displayName: "MovieTile",
 
       }
     }
-    console.log(this.props.movie);
     if (this.props.movie) {
 
       var cast = $.parseJSON(this.props.movie.cast.replace(/=>/g, ':')).map(function(member, index){
@@ -168,7 +169,7 @@ var MovieTile = React.createClass({displayName: "MovieTile",
                 React.createElement("h1", null, "Add a Movie")
               ), 
               React.createElement("div", {className: "modal-body"}, 
-                React.createElement(MovieForm, {thing_id: this.props.thing.id, url: "/movie_search"}
+                React.createElement(MovieForm, {thing: this.props.thing, url: "/movie_search"}
                 )
               )
             )

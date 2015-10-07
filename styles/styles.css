@@ -7833,7 +7833,11 @@ ul.result-list {
       float: left; }
 
 #thing-sidebar .timeline-year {
-  cursor: pointer; }
+  font-size: 50px;
+  cursor: pointer;
+  transition: font-size .5s; }
+  #thing-sidebar .timeline-year:hover {
+    font-size: 60px; }
 
 .ReactModal__Overlay--after-open {
   background-color: #575757; }
@@ -7842,5 +7846,8 @@ ul.result-list {
   width: 75%;
   margin: 0 auto;
   text-align: center; }
+
+input[type="text"] {
+  font-size: large; }
 
 /*# sourceMappingURL=styles.css.map */

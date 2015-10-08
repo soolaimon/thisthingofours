@@ -15,7 +15,7 @@ get '/things' do
 end
 
 get '/things.json' do
-  json Thing.all
+  json Thing.all.reverse
 end
 
 get '/things/:id/movies.json' do

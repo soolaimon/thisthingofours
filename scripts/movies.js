@@ -57,6 +57,8 @@ var MovieForm = React.createClass({displayName: "MovieForm",
   setMovie: function(movie) {
     if (confirm('Do you want to add ' + movie.title + ' to ' + this.props.thing.name)) {
       this.setState({movie: movie, results: []});
+      this.props.updateList(movie);
+
     }
  },
   search: function () {
@@ -127,6 +129,24 @@ var MovieTile = React.createClass({displayName: "MovieTile",
   showMovieDetails: function () {
     console.log("NEED TO SHOW DETAILS, YO")
   },
+  updateList: function (movie) {
+    $.ajax({
+      url: 'things/' + this.props.thing.id,
+      type: 'PUT',
+      data: {movie: movie},
+    })
+    .done(function(data) {
+      console.log('blah');
+      console.log(data);
+    })
+    .fail(function() {
+      console.log("error");
+    })
+    .always(function() {
+      console.log("complete");
+    });
+    
+  },
   render: function () {
     const modalStyles = {
       overlay : {
@@ -169,7 +189,7 @@ var MovieTile = React.createClass({displayName: "MovieTile",
                 React.createElement("h1", null, "Add a Movie")
               ), 
               React.createElement("div", {className: "modal-body"}, 
-                React.createElement(MovieForm, {thing: this.props.thing, url: "/movie_search"}
+                React.createElement(MovieForm, {updateList: this.updateList, thing: this.props.thing, url: "/movie_search"}
                 )
               )
             )

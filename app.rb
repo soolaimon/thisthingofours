@@ -32,3 +32,14 @@ get '/movie_search' do
   json movies
 end
 
+put '/things/:id' do
+  thing = Thing.find(params[:id])
+  movie = thing.movies.create(params[:movie])
+  movie.assign_rt_attributes
+  if movie.save
+    json movie
+  else
+    json error: movie.errors 
+  end
+end
+
